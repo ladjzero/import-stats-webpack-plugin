@@ -10,7 +10,7 @@ test('normal import', done => {
     },
     plugins: [
       new ImportStatsPlugin({
-        imports: ['lodash'],
+        imports: ['lodash', 'inexistent'],
         print: result => expect(result).toEqual({ lodash: { default: 1, debounce: 1, get: 1 } }),
       })
     ]

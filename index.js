@@ -5,10 +5,15 @@ const defaultOptions = {
   imports: [],
   print: (results, libName) => {
     const result = results[libName];
-    let sum = 0;
-    const vm = Object.keys(result).map(key => ({ IMPORT: key, COUNT: (sum+=result[key],result[key])})).sort((l, r) => l.COUNT - r.COUNT).reverse();
-    console.info('[ImportStatsPlugin]', chalk.green(libName), `total: ${sum}`);    
-    console.info(columnify(vm));
+    
+    if (result) {
+      let sum = 0;
+      const vm = Object.keys(result).map(key => ({ IMPORT: key, COUNT: (sum+=result[key],result[key])})).sort((l, r) => l.COUNT - r.COUNT).reverse();
+      console.info('[ImportStatsPlugin]', chalk.green(libName), `total: ${sum}`);    
+      console.info(columnify(vm));
+    } else {
+      console.info('[ImportStatsPlugin]', chalk.green(libName), 'total: 0');    
+    }
   }
 };
 
